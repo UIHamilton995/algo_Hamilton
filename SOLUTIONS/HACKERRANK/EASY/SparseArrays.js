@@ -24,4 +24,4 @@ function matchingStrings(stringList, queries){
   return result
 }
 
-// The hashmap is more scalable and saves you the stress of looping through the array for every item or element of the array that you want to count.
+// The hashmap is more scalable; O(n + q) and saves you the stress of looping through the array for every item or element of the array that you want to count; O(n * q)
