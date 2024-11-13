@@ -1,0 +1,11 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 3;
+  font-weight: bolder;
+
+  color-scheme: light;
+  text-emphasis-color:black;
+
+  text-rendering: optimizeLegibility;
+}
+
