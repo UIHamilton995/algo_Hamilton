@@ -1,79 +1,36 @@
 // When you export the global function of this file and edit it as "App", it functions as global default file. Alter file name to "App" as well to get a visual of code on dev
 
-import { useReducer } from "react";
+// Situations to implement useMemo; 1. When you are calculating a value which may be cumbersome in size, array or like BigInts or large set of data. You get to call out and display only your preferred data set. 2. When using or returning arrays or objects by referencing and it is important to stabilize them. In all, this will help to reduce the load of reloading data every time a particular page or route is refetched. When it looks at the dependency array of its function, it confirms if the page is still the same as it was before and returns new display if any
 
-function UserForms() {
-  // Hook for dynamic display
-  const [state, dispatch] = useReducer((state, action) => ({
-    ...state,
-    ...action
-  }), {
-    first: " ",
-    last: " "
-  })
-  return (
-    <div>
-      <input type="text"
-        value={state.first}
-        onChange={(e) => dispatch({first: e.target.value})}
-      />
-      <input type="text"
-        value={state.last}
-        onChange={(e) => dispatch({last: e.target.value})}
-      />
-    </div>
-  )
-}
 
-function NameLists() {
+import { useState, useMemo } from "react";
 
-  const [state, dispatch] = useReducer((state, action) => {
-    switch (action.type) {
-      case "SET_NAME": // set_name is defined 
-        return { ...state, name: action.payload }
-      case "ADD_NAME":
-        return {
-          ...state,
-          names: [...state.names, state.name],
-          name: ""
-        } 
-      // default:
-      //   return state
-    }
-  }, {
-    names: [], // current state(names and name object )
-    name: "",
-  })
-
-  return (
-      // An input bearing a current name with an event to change text value immediately there is a mutation; we dispatch via this reducer, a type of setname and payload that delivers the current payload
-    <div>
-      <div
-      // Map section to list all the added input
-      >
-        {state.names.map((name, index) => (
-          <div key={index}>{name}</div>
-       ))} 
-      </div>
-      <input type="text"
-        value={state.name}
-        onChange={(e) => dispatch({type: "SET_NAME", payload: e.target.value})}
-      />
-      <div> Name = {state.name} </div>
-      <button onClick={() => dispatch({type: "ADD_NAME"})}>
-        Add Name
-      </button>
-    </div>
-  )
-}
-
-//
 function App() {
+
+  const [numbers] = useState([5, 20, 30])
+  const total = useMemo(() => numbers.reduce((acc, number) => acc + number, 0)
+  , [numbers])
+  const [names] = useState(['John', 'Paul', 'George', 'Ringo'])
+  const sortedNames = useMemo(() => [...names].sort(), [names])
+
+  const [count1, setCount1] = useState(0)
+  const [count2, setCount2] = useState(0)
+
+  const countTotal = useMemo(() => count1 + count2, [count1, count2])
+
   return (
-    <>
-      <UserForms  />
-      <NameLists />
-    </>
+    <div>
+      Total:{total}
+      <div>
+        <button onClick={() => setCount1(count1 + 1)}>Count1: {count1}</button>
+        <button onClick={() => setCount2(count2 + 1)}>Count2: {count2}</button>
+      </div>
+      AllNames: {names.join(', ')}
+      <div>
+        sortedNames: {sortedNames.join(', ')}
+      </div>
+      <span>Totalcount: {countTotal}</span>
+    </div>
   )
 }
 

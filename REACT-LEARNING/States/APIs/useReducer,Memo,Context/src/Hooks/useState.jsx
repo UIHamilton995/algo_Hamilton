@@ -31,7 +31,7 @@ function NameList() {
 
 function Counter() {
 
-  let [count, setCount] = useState(10)
+  let [count, setCount] = useState(10)  // when you call useState hook with let keyword, there is a delay in execution. There is a check to determine and authorize the altering of the virtualDOM as it sees the function detail. This can cause something like a lag on the rendering. But when you use const, the response is quicker as it is an immutable declaration.
   function addOne(){
     setCount(count++)
   }
