@@ -11,12 +11,18 @@ function formingMagicSquare(s) {
     [[2, 7, 6], [9, 5, 1], [4, 3, 8]]
   ];
 
+  const flatInput = s.flat()
   let minCost = Infinity
   
   // Loop through each magic square combination
   for (const magic of magicSquares) {
-    let currentCost = 0
+    let cost = 0
 
     // Calculate the cost to transform the input matrix to this magic square
+    for (i = 0; i < 9; i++){
+      cost += Math.abs(flatInput[i] - magic[i])
+    }
+    minCost = Math.min(minCost, cost)
   }
+  return minCost
 } 

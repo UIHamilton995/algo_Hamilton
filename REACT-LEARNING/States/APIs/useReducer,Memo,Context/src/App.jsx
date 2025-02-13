@@ -11,7 +11,7 @@ function App() {
   const total = useMemo(() => numbers.reduce((acc, number) => acc + number, 0)
   , [numbers])
   const [names] = useState(['John', 'Paul', 'George', 'Ringo'])
-  const sortedNames = useMemo(() => [...names].sort(), [names])
+  const sortedNames = useMemo(() => [...names].sort(), [names]) // Using sort without spread will not alter the return array as you need spread operator to make a copy of the array before sorting properly
 
   const [count1, setCount1] = useState(0)
   const [count2, setCount2] = useState(0)
