@@ -1,12 +1,13 @@
-import MoviesList from "./pages/MoviesList"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-
-const App = () => {
+function App() {
 
   return (
-    <>
-     <MoviesList />
-    </>
+    <Router>
+        <Routes>
+            <Route />
+        </Routes>
+    </Router> 
   )
 }
 
