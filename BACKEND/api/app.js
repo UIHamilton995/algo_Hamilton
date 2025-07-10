@@ -1,12 +1,10 @@
 const express = require('express')
 const app = express()
-const PORT = 3000
+const PORT = 2025
 
-
-app.get ('/', (req, res) =>{
-  res.send('Hello World')
+app.get('/', (req, res) => {
+  res.send('Welcome to Zarttalent')
 })
-
-app.listen (PORT, (req, res) =>{
-  console.log('App is running on Port 3000')
+app.listen(PORT, () => {
+  console.log("Server is on PORT 2025")
 })
