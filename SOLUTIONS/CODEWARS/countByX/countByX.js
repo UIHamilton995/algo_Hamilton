@@ -1,5 +1,5 @@
 function countByX(n, x) {
-  let z = [10,8,6,4,2]
+  let z = []
   let multiple = n * x
 
   while (n >= 1 &&  x >= 1) {
