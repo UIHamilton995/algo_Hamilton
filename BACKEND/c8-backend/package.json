@@ -1,0 +1,13 @@
+{
+  "name": "c8-backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node mainBackend.js"
+  },
+
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
