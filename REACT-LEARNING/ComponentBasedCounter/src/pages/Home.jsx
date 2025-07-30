@@ -30,9 +30,12 @@ const Home = () => {
           <button type="submit" className="search-button">Search</button>
         </form>
         <div className="movies-grid">
-          {movies.map((movie) => (
-            (<MovieCard movie={movie} key={movie.id} />)
-          ))}
+          {movies.map(
+            (movie) => 
+              movie.title.toLowerCase().startsWith(searchQuery) && (
+              <MovieCard movie={movie} key={movie.id} />
+            )
+          )}
         </div>
       </div>
     </>
@@ -40,3 +43,7 @@ const Home = () => {
 }
 
 export default Home;
+
+
+
+// When a state change occurs, the entire component is re-ran or re-rendered
