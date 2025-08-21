@@ -1,47 +1,30 @@
-const express = require('express');
-const fs = require("fs");
+const express = require('express')
 const app = express();
-const PORT = 8888;
-const DATA_LOCATION = './data.json';
-require('dotenv').config(); 
-
-app.use(express.json());
-
-// GET endpoint: fetch address from Positionstack
-app.get('/address', async (req, res) => {
-  // Get lat/lon from query string OR fallback defaults
-  const lat = req.query.lat || 6.6778;
-  const lon = req.query.lon || 3.1654;
-
-  const accessKey = process.env.YOUR_API_KEY; 
-  const url = `http://api.positionstack.com/v1/reverse?access_key=${accessKey}&query=${lat},${lon}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data && data.data && data.data.length > 0) {
-      const fullAddress = data.data[0].label;
-
-      // Save result locally (optional persistence)
-      fs.writeFileSync(DATA_LOCATION, JSON.stringify({ fullAddress }, null, 2));
-
-      // Respond with the address
-      return res.json({ address: fullAddress });
-    } else {
-      return res.status(404).json({ error: "No address found" });
-    }
-  } catch (error) {
-    console.error("Error fetching address:", error.message);
-    return res.status(500).json({ error: "Server error" });
-  }
-});
-
-// Basic health check
+const PORT = 4444
+const fs = require('fs')
+const DATA_LOCATION = './data.json'
+ 
+ 
+app.use(express.json())
+ 
+if (!fs.existsSync(DATA_LOCATION)) fs.writeFileSync(DATA_LOCATION, '[]')
+   
+const readData = () => JSON.parse(fs.readFileSync(DATA_LOCATION, 'utf-8'))
+const modifyData = (data) => fs.writeFileSync(DATA_LOCATION, JSON.stringify(data, null, 2))
+ 
 app.get('/', (req, res) => {
-  res.send('Positionstack Reverse Geocoding API is running...');
-});
+    res.send ("welcome to Sarah's app")
+})
+ 
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+// creating a book
+app.post("/books", (req, res) => {
+  const books = readData()
+  const newBook = {
+    id: Date.now(), ...req.body}
+    books.push(newBook)
+    modifyData(books)
+    res.status(201).json(newBook)
+  })
+  
+app.listen(PORT, () => console.log("Your Server is running on PORT 4444"))

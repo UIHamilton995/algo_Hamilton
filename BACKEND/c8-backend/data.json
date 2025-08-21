@@ -1,3 +1,16 @@
-{
-  "fullAddress": "Faith Tabarnacle, Agege, OG, Nigeria"
-}
+[
+  {
+    "id": 1755795686773,
+    "title": "things fall apart",
+    "author": "Chinua Achebe",
+    "yearPublished": 2001,
+    "quantity": 12
+  },
+  {
+    "id": 1755795771242,
+    "title": "How I wrote my first code",
+    "author": "Sarah Wokoma",
+    "yearPublished": 2025,
+    "quantity": 50
+  }
+]
